@@ -1,5 +1,4 @@
-pub fn run() {
-    print!("{}", get_max_top_3_calories("5800
+5800
 2273
 1315
 5801
@@ -2248,60 +2247,4 @@ pub fn run() {
 5785
 2912
 5664
-2775"))
-}
-
-fn get_max_calories(input: &str) -> i64 {
-    let elfes: Vec<&str> = input.split("\n\n").collect();
-    return elfes.iter()
-        .map(|elfe| elfe.split("\n")
-            .map(|calorie| calorie.parse::<i64>().unwrap())
-            .sum())
-        .max().unwrap();
-}
-
-fn get_max_top_3_calories(input: &str) -> i32 {
-    let elfes: Vec<&str> = input.split("\n\n").collect();
-    let mut map: Vec<i32> = elfes.iter()
-        .map(|elfe| elfe.split("\n")
-            .map(|calorie| calorie.parse::<i32>().unwrap())
-            .sum())
-        .collect();
-    map.sort();
-    map.reverse();
-    return map[0..3].iter().sum();
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::day1::{get_max_calories, get_max_top_3_calories};
-
-    fn get_input() -> &'static str {
-        "1000
-2000
-3000
-
-4000
-
-5000
-6000
-
-7000
-8000
-9000
-
-10000"
-    }
-
-    #[test]
-    fn should_get_max_elf_calories() {
-        let max_calories = get_max_calories(get_input());
-        assert_eq!(max_calories, 24000)
-    }
-
-    #[test]
-    fn should_get_max_top_3_elf_calories() {
-        let max_calories = get_max_top_3_calories(get_input());
-        assert_eq!(max_calories, 45000)
-    }
-}
+2775
