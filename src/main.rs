@@ -1,5 +1,7 @@
+mod day2;
 mod day1;
+mod utils;
 
 fn main() {
-    day1::day1::run()
+    day2::day2::run()
 }
