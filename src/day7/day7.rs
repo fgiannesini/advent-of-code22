@@ -3,6 +3,7 @@ use crate::utils::file;
 pub fn run() {
     let input = file::read("day7");
     println!("{}", get_directories_size_below_100_000(input.as_str()));
+    println!("{}", get_folder_to_delete(input.as_str()));
 }
 
 #[derive(Debug)]
@@ -53,9 +54,27 @@ impl DirectoryTree {
     fn sum_sizes_under(&self, size_limit: i32) -> i32 {
         return self.files_size.iter().filter(|size| *size < &size_limit).sum();
     }
+
+    fn get_folder_to_delete(&self) -> i32 {
+        let remaining_size = 70000000 - self.files_size[0];
+        return *self.files_size.iter()
+            .filter(| size| *size + remaining_size as i32 > 30000000)
+            .min()
+            .unwrap();
+    }
 }
 
 fn get_directories_size_below_100_000(input: &str) -> i32 {
+    let directory_tree = build_directory_tree(input);
+    return directory_tree.sum_sizes_under(100000);
+}
+
+fn get_folder_to_delete(input: &str) -> i32 {
+    let directory_tree = build_directory_tree(input);
+    return directory_tree.get_folder_to_delete();
+}
+
+fn build_directory_tree(input: &str) -> DirectoryTree {
     let mut directory_tree: DirectoryTree = DirectoryTree::new();
     let split = input.split("\r\n").collect::<Vec<&str>>();
     for line in split {
@@ -79,18 +98,23 @@ fn get_directories_size_below_100_000(input: &str) -> i32 {
             }
         }
     }
-
-    return directory_tree.sum_sizes_under(100000);
+    directory_tree
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::day7::day7::get_directories_size_below_100_000;
+    use crate::day7::day7::{get_directories_size_below_100_000, get_folder_to_delete};
     use crate::utils::file;
 
     #[test]
-    fn should_detect_packet_marker() {
+    fn should_get_directories_size_below_100_000() {
         let result = get_directories_size_below_100_000(file::read_test("day7").as_str());
         assert_eq!(result, 95437)
+    }
+
+    #[test]
+    fn should_get_size_to_delete() {
+        let result = get_folder_to_delete(file::read_test("day7").as_str());
+        assert_eq!(result, 24933642)
     }
 }
