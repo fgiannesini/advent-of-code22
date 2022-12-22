@@ -1,7 +1,9 @@
 use crate::utils::file;
 
+#[allow(dead_code)]
 pub fn run() {
     let input = file::read("day3");
+    println!("{}", sum_priorities_part_one(input.as_str()));
     println!("{}", sum_priorities_part_two(input.as_str()));
 }
 

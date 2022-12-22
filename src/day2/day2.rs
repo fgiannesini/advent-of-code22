@@ -1,5 +1,6 @@
 use crate::utils::file;
 
+#[allow(dead_code)]
 pub fn run() {
     let input = file::read("day2");
     println!("{}", count_score_part_one(input.as_str()));

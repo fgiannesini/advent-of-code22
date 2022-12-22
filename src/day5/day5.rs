@@ -1,5 +1,6 @@
 use crate::utils::file;
 
+#[allow(dead_code)]
 pub fn run() {
     let input = file::read("day5");
     println!("{}", compute_top_of_stacks_with_unordered_moves(input.as_str()));

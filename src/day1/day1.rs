@@ -1,5 +1,6 @@
 use crate::utils::file;
 
+#[allow(dead_code)]
 pub fn run() {
     let input = file::read("day1");
     println!("{}", get_max_calories(input.as_str()));

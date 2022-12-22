@@ -1,6 +1,8 @@
 use std::collections::HashSet;
+
 use crate::utils::file;
 
+#[allow(dead_code)]
 pub fn run() {
     let input = file::read("day6");
     println!("{}", detect_packet_marker(input.as_str()));

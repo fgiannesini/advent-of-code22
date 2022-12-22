@@ -1,5 +1,6 @@
 use crate::utils::file;
 
+#[allow(dead_code)]
 pub fn run() {
     let input = file::read("day4");
     println!("{}", count_included_pairs(input.as_str()));

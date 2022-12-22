@@ -1,5 +1,6 @@
 use crate::utils::file;
 
+#[allow(dead_code)]
 pub fn run() {
     let input = file::read("day7");
     println!("{}", get_directories_size_below_100_000(input.as_str()));
@@ -37,8 +38,8 @@ impl DirectoryTree {
         let indices = self.parents
             .iter()
             .enumerate()
-            .filter(|(index, &parent_index)| parent_index.map(|i| i == self.current).unwrap_or(false))
-            .map(|(index, &parent_index)| index)
+            .filter(|(_index, &parent_index)| parent_index.map(|i| i == self.current).unwrap_or(false))
+            .map(|(index, &_parent_index)| index)
             .collect::<Vec<usize>>();
         self.current = *indices.iter().find(|&&index| self.names[index] == name).unwrap();
     }
